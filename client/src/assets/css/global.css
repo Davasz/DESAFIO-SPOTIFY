@@ -1,0 +1,46 @@
+/* Fonts */
+@font-face {
+    font-family: 'Sansation';
+    src: url('/src/assets/fonts/Sansation.ttf') format('truetype');
+}
+
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*:before,
+*:after {
+    border: 0;
+    box-sizing: inherit;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+body {
+    background-color: #0A0A0A;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
