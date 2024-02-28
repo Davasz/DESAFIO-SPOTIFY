@@ -1,37 +1,20 @@
 <template>
     <header>
         <nav>
-            <div :class="['div-link', 'home']">
+            <!-- Dynamic class according to path -->
+            <div :class="['div-link', 'home', { 'active': $route.path === '/' }]">
                 <router-link class="link" to="/">Home</router-link>
             </div>
-            <div class="div-link contracts">
+            <!-- Dynamic class according to path -->
+            <div :class="['div-link', 'contracts', { 'active': $route.path === '/contratos' }]">
                 <router-link class="link" to="/contratos">Contratos</router-link>
             </div>
         </nav>
     </header>
 </template>
 
-<script>
-// Imports
-import {  } from "vue"
-
-export default {  
-    setup() {
-
-        // Methods
-        const isActive = (e) => {
-            console.log(e)
-        }
-
-        return {
-            isActive
-        }
-    }
-}
-
-</script>
-
 <style scoped>
+
 /* Mobile First */
 header {
     font-family: 'Sansation', sans-serif;
@@ -79,12 +62,9 @@ nav .link {
     color: #FFFFFF;
 }
 
-nav .actvate {
+/* Dynamic link class */
+nav .active {
     border: none;
     background-color: #993DF8;
-}
-
-nav a.router-link-exact-active {
-  background-color: #993DF8;
 }
 </style>
