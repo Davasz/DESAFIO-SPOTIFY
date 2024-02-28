@@ -16,9 +16,6 @@ export default {
   components: {
     TheHeader
   },
-  setup() {
-
-  }
 }
 
 </script>
