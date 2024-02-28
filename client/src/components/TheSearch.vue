@@ -1,12 +1,12 @@
 <template>
     <div class="search-div">
-        <input class="search" placeholder="Procure o artista/banda" type="text">
+        <input v-model="inputValue" class="search" placeholder="Procure o artista/banda" type="text">
         <img @click="onSearch()" class="search-icon" src="../assets/img/icons/search-icon.svg" alt="Ícone de pesquisa">
     </div>
 </template>
 
 <script>
-
+import { ref } from 'vue'
 // Import store
 import { useStore } from 'vuex';
 
@@ -15,16 +15,21 @@ export default {
         // Store initialization
         const store = useStore();
 
+        // Variables
+        let inputValue = ref('')
+
         // Handling research method
         const onSearch = () =>  {
+            let artistFormated = inputValue.value.replace(' ', '+')
             // Calling the storeArtist action
-            // store.dispatch('storeArtist', 'https://api.spotify.com/v1/search?q=Michael+Jackson&type=artist&limit=5')
+            store.dispatch('storeArtist', `https://api.spotify.com/v1/search?q=${artistFormated}&type=artist&limit=5`)
         }
 
         // Returning the variables
         return {
             store,
-            onSearch
+            onSearch,
+            inputValue
         }
     }
 
