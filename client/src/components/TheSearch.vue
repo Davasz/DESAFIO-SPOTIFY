@@ -6,6 +6,8 @@
 </template>
 
 <script>
+
+// Import vue functions
 import { ref } from 'vue'
 // Import store
 import { useStore } from 'vuex';
@@ -19,7 +21,7 @@ export default {
         let inputValue = ref('')
 
         // Handling research method
-        const onSearch = () =>  {
+        const onSearch = () => {
             let artistFormated = inputValue.value.replace(' ', '+')
             // Calling the storeArtist action
             store.dispatch('storeArtist', `https://api.spotify.com/v1/search?q=${artistFormated}&type=artist&limit=8`)
@@ -38,7 +40,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* Mobile First */
 .search-div {
     position: relative;
@@ -68,7 +69,7 @@ export default {
 }
 
 @media (min-width: 780px) {
-    .search{
+    .search {
         width: 70vw;
     }
 }

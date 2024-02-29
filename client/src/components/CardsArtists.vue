@@ -1,4 +1,5 @@
 <template>
+
     <div class="card">
         <div class="card-content">
             <!-- Getting the image src via props -->
@@ -10,6 +11,7 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -25,6 +27,7 @@ export default {
     },
 
     setup(props) {
+
         // Checks if there is an image url, if not, it returns a default one
         const imgUrl = computed(() => {
             if (props.imgArtist && props.imgArtist.url) {
@@ -96,4 +99,5 @@ export default {
     transform: translateY(-5px);
     box-shadow: 0 4px 4px 4px #a930ff;
 }
+
 </style>
