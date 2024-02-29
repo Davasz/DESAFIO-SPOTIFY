@@ -1,6 +1,11 @@
 <template>
+
+    <!-- Handle and prevent the form default event -->
     <form @submit.prevent="handleSubmit(this)">
-        <img @click="onClick" class="close-icon" src="../assets/img/icons/close-icon.svg" alt="">
+        <!-- Close icon -->
+        <img @click="onClick" class="close-icon" src="../assets/img/icons/close-icon.svg" alt="close-icon">
+
+        <!-- Assigns v-model to all fields -->
         <div class="artist-informations">
             <img class="img-artist" :src="imgUrl" alt="Image Artist">
             <input v-model="artistName" type="text" name="artistName" required readonly>
@@ -12,23 +17,32 @@
         </div>
         <input v-model="eventAdress" class="full-input" type="text" required placeholder="Endereço do evento">
         <div class="buttons">
-            <button class="button-submit" type="submit">Contratar</button>
-            <button @click="clickSpotify" class="spotify-button">
+            <button class="button-submit" type="submit">Contratar</button>   <!-- Submit form button -->
+            <button @click.prevent="clickSpotify" class="spotify-button">    <!-- Go to Spotify button -->   
                 <img src="../assets/img/icons/spotify-icon.svg" alt="Logo Spotify">
                 Ver no Spotify
             </button>
         </div>
     </form>
+
 </template>
 
 <script>
+
+// Import vue functions
 import { ref, computed } from 'vue'
+
+// Import store
+import { useStore } from 'vuex'
 
 export default {
     props: {
         artist: Object
     },
+
     setup(props, { emit }) {
+        // Store initialization
+        const store = useStore()
 
         // Variables
         let artistName = ref(props.artist.name)
@@ -50,16 +64,37 @@ export default {
         const clickSpotify = () => {
             window.open(props.artist.external_urls.spotify, "_blank")
         }
-        const handleSubmit = () => {
-            console.log(artistName.value)
-            console.log(userName.value)
-            console.log(date.value)
-            console.log(cache.value)
-            console.log(eventAdress.value)
+
+        // Handle form submit
+        const handleSubmit = async () => {
+            // Checks if it is a valid date
+            const dateYear = date.value.split('-')[0]
+            if (dateYear.length > 4) {
+                emit('alertError')
+            } else {
+                const contract = {
+                    artist_name: artistName.value,
+                    user_name: userName.value,
+                    date: date.value,
+                    cache: cache.value,
+                    event_adress: eventAdress.value,
+                    artist_id: props.artist.id
+                }
+
+                // Calls the StoreContract acction
+                await store.dispatch('storeContract', contract)
+                //sends the alert to the father
+                emit('alertDone')
+                // Close the form
+                onClick()
+            }
         }
+        // Close the form
         const onClick = () => {
             emit('close')
         }
+
+        // Return the variables
         return {
             onClick,
             artistName,
