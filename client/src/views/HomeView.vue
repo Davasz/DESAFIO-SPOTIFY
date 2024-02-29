@@ -9,21 +9,24 @@
         <!-- Search component -->
         <TheSearch></TheSearch>
 
+        <FormArtist :artist="selectedArtist" @close="removeForm" v-if="showForm"></FormArtist>
+
         <!-- Card component -->
         <!-- Take each artist from the state store and generate a card with information about each one -->
-        <CardsArtists v-for="(artist, index) in store.state.artist" :key="index" :imgArtist="artist.images[0]">
-            
-            <!-- Transmitting name information via slots -->
-            <template v-slot:name>
-                <h1 class="card-name">{{ artist.name }}</h1>
-            </template>
+        <section class="section-cards">
+            <CardsArtists v-for="(artist, index) in store.state.artist" :key="index" @click="apperForm(artist)" :imgArtist="artist.images[0]">
+                <!-- Transmitting name information via slots -->
+                <template v-slot:name>
+                    <h1 class="card-name">{{ artist.name.split(' ').slice(0, 2).join(' ')}}</h1>
+                </template>
 
-            <!-- Transmitting genres information via slots -->
-            <template v-slot:genres>
-                <p class="card-gender">{{ artist.genres[0] }}</p>
-            </template>
+                <!-- Transmitting genres information via slots -->
+                <template v-slot:genres>
+                    <p class="card-gender">{{ artist.genres[0] }}</p>
+                </template>
 
-        </CardsArtists>
+            </CardsArtists>
+        </section>
 
 
     </main>
@@ -34,7 +37,10 @@
 // Import components
 import TheSearch from '@/components/TheSearch.vue';
 import CardsArtists from '@/components/CardsArtists.vue';
+import FormArtist from '@/components/FormArtist.vue'
+
 // Import vue functions
+import { ref } from 'vue'
 
 // Import store
 import { useStore } from 'vuex';
@@ -42,16 +48,34 @@ import { useStore } from 'vuex';
 export default {
     components: {
         TheSearch,
-        CardsArtists
+        CardsArtists,
+        FormArtist
     },
 
     setup() {
         // Store initialization
         const store = useStore();
 
+        // Variables
+        let showForm = ref(false)
+        const selectedArtist = ref(null);
+
+        // Methods
+        const apperForm = (artist) => {
+            selectedArtist.value = artist
+            showForm.value = true
+        }
+        const removeForm = () => {
+            showForm.value = false
+        }
+
         // Returning the variables
         return {
-            store
+            store,
+            showForm,
+            apperForm,
+            removeForm,
+            selectedArtist
         }
     }
 }
@@ -59,7 +83,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* Mobile First */
 main {
     display: flex;
@@ -76,5 +99,15 @@ main {
 
 .salutation span {
     color: #B1B1B1;
+}
+
+@media (min-width: 780px) {
+    .section-cards {
+        display: flex;
+        width: 90%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3rem;
+    }
 }
 </style>
