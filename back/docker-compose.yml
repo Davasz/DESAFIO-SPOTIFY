@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: aa123
+      MYSQL_DATABASE: YOUR_ARTIST_DB
+      MYSQL_USER: userteste
+      MYSQL_PASSWORD: aa123
+    ports:
+      - "3000:3306"
