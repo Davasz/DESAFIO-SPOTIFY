@@ -1,8 +1,7 @@
+// Imports
 import axios from 'axios'
-import dotenv from 'dotenv';
 
-dotenv.config()
-
+// Method to get new Spotify auth token
 const getToken = async () => {
     const body = new URLSearchParams({
         grant_type: 'client_credentials',
@@ -17,10 +16,12 @@ const getToken = async () => {
         .then(response => response.data.access_token)
 
 
+    // Store token at localStorage
     localStorage.setItem('token', responseToken)
     return responseToken
 }
 
+// Method to verify current token
 const isTokenValid = async () => {
     const token = localStorage.getItem('token')
 
@@ -37,6 +38,7 @@ const isTokenValid = async () => {
 
 }
 
+// Method to always return a valid token
 const verifyToken = async () => {
     const token = localStorage.getItem('token')
     if (!token) {
