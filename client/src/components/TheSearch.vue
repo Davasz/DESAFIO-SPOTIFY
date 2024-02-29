@@ -22,7 +22,7 @@ export default {
         const onSearch = () =>  {
             let artistFormated = inputValue.value.replace(' ', '+')
             // Calling the storeArtist action
-            store.dispatch('storeArtist', `https://api.spotify.com/v1/search?q=${artistFormated}&type=artist&limit=5`)
+            store.dispatch('storeArtist', `https://api.spotify.com/v1/search?q=${artistFormated}&type=artist&limit=8`)
         }
 
         // Returning the variables
@@ -42,6 +42,7 @@ export default {
 /* Mobile First */
 .search-div {
     position: relative;
+    margin-bottom: 2rem;
 }
 
 .search {
@@ -64,4 +65,11 @@ export default {
     transform: translateY(-50%);
     right: 1rem;
     cursor: pointer;
-}</style>
+}
+
+@media (min-width: 780px) {
+    .search{
+        width: 70vw;
+    }
+}
+</style>

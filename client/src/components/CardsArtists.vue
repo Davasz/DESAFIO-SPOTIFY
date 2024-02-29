@@ -53,6 +53,8 @@ export default {
     border-radius: 20px;
     padding: 5px;
     background-image: linear-gradient(144deg, #a930ff, #c693f6 50%, #42007b);
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .card-content {
@@ -88,5 +90,10 @@ export default {
 .card-gender {
     font-family: 'Sansation', sans-serif;
     color: #B1B1B1;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 4px 4px #a930ff;
 }
 </style>
