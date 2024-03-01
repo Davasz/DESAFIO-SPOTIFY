@@ -13,9 +13,9 @@
         <input v-model="userName" class="full-input" type="text" required placeholder="Nome do contratante">
         <div class="conjunt-inputs">
             <input v-model="date" class="input-data" required type="date">
-            <input v-model="cache" class="input-number" type="number" required placeholder="Cachê">
+            <input v-model="cache" class="input-number" type="number" placeholder="Cachê">
         </div>
-        <input v-model="eventAdress" class="full-input" type="text" required placeholder="Endereço do evento">
+        <input v-model="eventAdress" class="full-input" type="text" placeholder="Endereço do evento">
         <div class="buttons">
             <button class="button-submit" type="submit">Contratar</button>   <!-- Submit form button -->
             <button @click.prevent="clickSpotify" class="spotify-button">    <!-- Go to Spotify button -->   
@@ -76,10 +76,12 @@ export default {
                     artist_name: artistName.value,
                     user_name: userName.value,
                     date: date.value,
-                    cache: cache.value,
+                    cache: cache.value ? cache.value : null, 
                     event_adress: eventAdress.value,
                     artist_id: props.artist.id
                 }
+
+                console.log(contract)
 
                 // Calls the StoreContract acction
                 await store.dispatch('storeContract', contract)

@@ -23,12 +23,12 @@ const Contracts = sequelize.define('Contracts', {
         allowNull: false
     },
     cache: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        allowNull: true,
     },
     event_adress: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: true
     },
     artist_id: {
         type: DataTypes.STRING(255),
@@ -43,4 +43,4 @@ const Contracts = sequelize.define('Contracts', {
 }
 );
 
-export default Contracts;
+export default Contracts
