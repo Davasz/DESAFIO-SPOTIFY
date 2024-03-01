@@ -4,6 +4,7 @@ import sequelize from 'sequelize'
 
 dotent.config()
 
+// Sequelize configs
 const database = new sequelize(
     process.env.DB,
     process.env.DB_USER,

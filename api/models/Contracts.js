@@ -1,6 +1,8 @@
+// Imports
 import { DataTypes } from 'sequelize'
 import sequelize from '../config/database.js'
 
+// Contracts Model
 const Contracts = sequelize.define('Contracts', {
     id_contract: {
         type: DataTypes.INTEGER,
