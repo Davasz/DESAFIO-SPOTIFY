@@ -1,5 +1,4 @@
 <template>
-
     <main>
         <!-- Reactive alert component -->
         <TheAlert :msg="msgAlert" :alertType="alertType" v-if="showAlert"></TheAlert>
@@ -11,15 +10,15 @@
         </div>
 
         <!-- Search component -->
-        <TheSearch></TheSearch>
+        <TheSearch @apperAlert="apperAlert($event)"></TheSearch>
 
         <!-- Reactive form component -->
-        <FormArtist :artist="selectedArtist" @alertDone="apperAlert('done')" @alertError="apperAlert('error')"
-            @close="removeForm" v-if="showForm">
+        <FormArtist :artist="selectedArtist" @apperAlert="apperAlert($event)" @close="removeForm" v-if="showForm">
         </FormArtist>
 
         <!-- It only appears if there is no artist being searched for -->
-        <h1 v-if="store.state.recenteArtist[0] && !store.state.artist[0]" class="recent-artists">Artistas contratados recentemente:</h1>
+        <h1 v-if="store.state.recenteArtist[0] && !store.state.artist[0]" class="recent-artists">Artistas contratados
+            recentemente:</h1>
 
         <!-- It only appears if there is no artist being searched for -->
         <section v-if="!store.state.artist[0]" class="recente-cards">
@@ -45,7 +44,7 @@
 
         <!-- Card component -->
         <section class="section-cards">
-            
+
             <!-- Take each artist from the state store and generate a card with information about each one -->
             <CardsArtists v-for="(artist, index) in store.state.artist" :key="index" @click="apperForm(artist)"
                 :imgArtist="artist.images[0]">
@@ -63,7 +62,6 @@
 
         </section>
     </main>
-
 </template>
 
 <script>
@@ -93,8 +91,16 @@ export default {
         const store = useStore()
 
         // Loads recent artists in the state, if there is no artist loaded
-        if(!store.state.artist[0]) {
-            store.dispatch('getRecentArtists')
+        if (!store.state.artist[0]) {
+            try {
+                store.dispatch('getRecentArtists')
+            } catch (error) {
+                apperAlert({
+                    type: 'error',
+                    message: 'Erro ao buscar artistas recentes!'
+                })
+            }
+
         }
 
         // Variables
@@ -107,24 +113,20 @@ export default {
         // Methods
 
         // Shows the alert according to the type received from the child
-        const apperAlert = (type) => {
+        const apperAlert = (eventData) => {
             showAlert.value = true
-            alertType.value = type
-            if (type == 'done') {
-                msgAlert.value = 'Feito!'
-            } else {
-                msgAlert.value = 'Erro!'
-            }
+            alertType.value = eventData.type
+            msgAlert.value = eventData.message
 
             // Keeps the alert on the screen for 2 seconds
             setTimeout(() => {
-                removeAlert(type)
+                removeAlert(eventData.type)
             }, 2000)
         }
 
         // Remove the alert
         const removeAlert = (type) => {
-            if(type == 'done') {
+            if (type == 'done') {
                 window.location.reload()
             }
             showAlert.value = false
@@ -160,7 +162,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* Mobile First */
 main {
     display: flex;
@@ -176,7 +177,7 @@ main {
 }
 
 .salutation span {
-    color: #B1B1B1; 
+    color: #B1B1B1;
 }
 
 
@@ -196,7 +197,7 @@ main {
         gap: 3rem;
     }
 
-    .recente-cards{
+    .recente-cards {
         display: flex;
         width: 90%;
         flex-wrap: wrap;
@@ -204,5 +205,4 @@ main {
         gap: 3rem;
     }
 }
-
 </style>

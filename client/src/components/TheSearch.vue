@@ -13,7 +13,7 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
-    setup() {
+    setup(props, { emit }) {
         // Store initialization
         const store = useStore();
 
@@ -22,9 +22,16 @@ export default {
 
         // Handling research method
         const onSearch = () => {
-            let artistFormated = inputValue.value.replace(' ', '+')
+            let artistFormated = inputValue.value.replace(' ', '+');
             // Calling the storeArtist action
             store.dispatch('storeArtist', `https://api.spotify.com/v1/search?q=${artistFormated}&type=artist&limit=8`)
+                .catch(error => {
+                    console.log(error)
+                    emit('apperAlert', {
+                        type: 'error',
+                        message: 'Erro ao buscar artistas'
+                    })
+                });
         }
 
         // Returning the variables

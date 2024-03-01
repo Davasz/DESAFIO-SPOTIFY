@@ -70,7 +70,10 @@ export default {
             // Checks if it is a valid date
             const dateYear = date.value.split('-')[0]
             if (dateYear.length > 4) {
-                emit('alertError')
+                emit('apperAlert', {
+                        type: 'error',
+                        message: 'Erro, verifique a data'
+                    })
             } else {
                 const contract = {
                     artist_name: artistName.value,
@@ -81,14 +84,22 @@ export default {
                     artist_id: props.artist.id
                 }
 
-                console.log(contract)
-
-                // Calls the StoreContract acction
+                try {
+                    // Calls the StoreContract acction
                 await store.dispatch('storeContract', contract)
                 //sends the alert to the father
-                emit('alertDone')
+                emit('apperAlert', {
+                        type: 'done',
+                        message: 'Artista contratado com sucesso!'
+                    })
                 // Close the form
                 onClick()
+                } catch (error) {
+                    emit('apperAlert', {
+                        type: 'error',
+                        message: 'Erro ao contratar artista!'
+                    })
+                }
             }
         }
         // Close the form

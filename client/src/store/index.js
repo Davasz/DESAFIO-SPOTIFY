@@ -53,8 +53,8 @@ export default createStore({
         commit('storeArtist', response.data.artists.items) // Call the mutations to save
 
       } catch (error) {
-        localStorage.removeItem('token') // The only likely error is that the token is expired, so remove the token from localstorage
-        console.log(error)
+          localStorage.removeItem('token') // The only likely error is that the token is expired, so remove the token from localstorage
+          throw error
       }
     },
 
@@ -64,6 +64,7 @@ export default createStore({
         await axios.post('http://localhost:3000', data)
       } catch (error) {
         console.log(error) // Basic errors have already been addressed in the components
+        throw error
       }
     },
 
@@ -90,10 +91,8 @@ export default createStore({
         }))
       } catch (error) {
         localStorage.removeItem('token') // The only likely error is that the token is expired, so remove the token from localstorage
-        console.log(error)
+        throw error
       }
-
-
     },
 
     // Save all contracts at store state
@@ -103,7 +102,8 @@ export default createStore({
 
         commit('storeContract', response.data) // Call the mutation 
       } catch (error) {
-        console.log(error) // There is no serious error that is precisely addressed
+        console.log(error) // Basic errors have already been addressed in the components
+        throw error
       }
     }
   }
