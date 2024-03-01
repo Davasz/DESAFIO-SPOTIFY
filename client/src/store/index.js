@@ -22,7 +22,11 @@ export default createStore({
     // Mutation to store recente artist data
     saveRecentArtist(state, data) {
       state.artist = []
-      state.recenteArtist.push(data)
+      const exists = state.recenteArtist.some(c => c.id === data.id)
+      // If the artist does not exist, add it to the array
+      if (!exists) {
+        state.recenteArtist.push(data)
+      }
     },
 
     // Mutation to store contracts data
@@ -65,24 +69,31 @@ export default createStore({
 
     // Save the Recente Artists
     async getRecentArtists({ commit }) {
+      try {
+        const token = await getToken() // Verify token
 
-      this.state.recenteArtist = [] // Clean the recente artists array
+        this.state.recenteArtist = [] // Clean the recente artists array
 
-      await this.dispatch('getContracts') // Call the getCOntracts acction
+        await this.dispatch('getContracts') // Call the getCOntracts acction
 
 
-      // For each contract, get the artist's ID
-      this.state.contracts.forEach((async (c) => {
+        // For each contract, get the artist's ID
+        this.state.contracts.forEach((async (c) => {
+          // Calls the Spotify API, which returns the artist with the specific id
+          const artistContrated = await axios.get('https://api.spotify.com/v1/artists/' + c.artist_id, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }).then()
 
-        // Calls the Spotify API, which returns the artist with the specific id
-        const artistContrated = await axios.get('https://api.spotify.com/v1/artists/' + c.artist_id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        }).then()
+          commit('saveRecentArtist', artistContrated.data) // Call the mutation
+        }))
+      } catch (error) {
+        localStorage.removeItem('token') // The only likely error is that the token is expired, so remove the token from localstorage
+        console.log(error)
+      }
 
-        commit('saveRecentArtist', artistContrated.data) // Call the mutation
-      }))
+
     },
 
     // Save all contracts at store state
