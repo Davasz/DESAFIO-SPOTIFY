@@ -69,16 +69,16 @@
 <script>
 
 // Import components
-import TheSearch from '@/components/TheSearch.vue';
-import CardsArtists from '@/components/CardsArtists.vue';
+import TheSearch from '@/components/TheSearch.vue'
+import CardsArtists from '@/components/CardsArtists.vue'
 import FormArtist from '@/components/FormArtist.vue'
-import TheAlert from '@/components/TheAlert.vue';
+import TheAlert from '@/components/TheAlert.vue'
 
 // Import vue functions
 import { ref } from 'vue'
 
 // Import store
-import { useStore } from 'vuex';
+import { useStore } from 'vuex'
 
 export default {
     components: {
@@ -90,7 +90,7 @@ export default {
 
     setup() {
         // Store initialization
-        const store = useStore();
+        const store = useStore()
 
         // Loads recent artists in the state, if there is no artist loaded
         if(!store.state.artist[0]) {
@@ -99,7 +99,7 @@ export default {
 
         // Variables
         let showForm = ref(false)
-        let selectedArtist = ref(null);
+        let selectedArtist = ref(null)
         let showAlert = ref(false)
         let alertType = ref('')
         let msgAlert = ref('')

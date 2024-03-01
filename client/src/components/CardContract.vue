@@ -28,7 +28,7 @@ export default {
         // Variables
         let artistName = ref(props.contract.artist_name)
         let userName = ref(props.contract.user_name)
-        let date = ref(props.contract.date.split('T')[0])
+        let date = ref(props.contract.date.split('T')[0]) // Format date
         let cache = ref(props.contract.cache)
         let eventAdress = ref(props.contract.event_adress)
 

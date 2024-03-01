@@ -13,10 +13,10 @@
 <script>
 
 // Import components
-import CardContract from '@/components/CardContract.vue';
+import CardContract from '@/components/CardContract.vue'
 
 // Import store
-import { useStore } from 'vuex';
+import { useStore } from 'vuex'
 
 
 export default {

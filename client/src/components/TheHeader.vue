@@ -62,6 +62,14 @@ nav .link {
     color: #FFFFFF;
 }
 
+.div-link {
+    transition: 0.3s;
+}
+
+.div-link:hover {
+    transform: translateY(-3px);
+}
+
 /* Dynamic link class */
 nav .active {
     border: none;
