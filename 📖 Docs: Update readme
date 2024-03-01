@@ -6,8 +6,6 @@
 O cliente solicita que você crie uma aplicação web para a contratação de artistas para shows particulares. Crie uma página, onde há um campo de pesquisa, este campo de pesquisa deve buscar por artistas (bandas e cantores), o resultado deve exibir uma grade ou listagem para que o usuário possa escolher um dos resultados. Ao escolher um dos resultados, o usuário deve ser levado a um formulário, que colete informações sobre a contratação do artista selecionado, contendo os campos: Nome do contratante*, Artista Selecionado*, Cachê, Data do evento* e Endereço. A submissão do formulário deve ser registrada e uma tela de sucesso exibida. O usuário poderá repetir o processo de contratação quantas vezes quiser e também consultar as contratações submetidas anteriormente.
 
 
-
-
 ## 🚀 Começando
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local.
@@ -141,7 +139,7 @@ Além dessas váriaveis, após o processo de seleção, será adcionado as segui
 
 `CLIENT_SECRET`
 
-Todas elas fazem parte da Dev API do Spotify, acesse a documentação: https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+Todas elas fazem parte da Dev API do Spotify, [Acesse a documentação](https://developer.spotify.com/documentation/web-api/tutorials/code-flow).
 
 
 ## 💻 Funcionalidades
@@ -175,7 +173,7 @@ Todas elas fazem parte da Dev API do Spotify, acesse a documentação: https://d
 
 ## 🎁 Expressões de gratidão
 
-- Agradeço à [EnterScience]() pela oportinidade oferecida e pela idealização do projeto;
+- Agradeço à [EnterScience](https://enterscience.com.br) pela oportinidade oferecida e pela idealização do projeto;
 
 - Agradeço ao mentor, Guilherme Silva, pelo rápido atendimento e suporte às dúvidas.
 
