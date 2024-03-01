@@ -49,7 +49,7 @@ const verifyToken = async () => {
         return token
     } else {
         const isValid = await isTokenValid()
-        if (!isValid) {
+        if (isValid) {
             token = await getToken()
             return token
         } else {
