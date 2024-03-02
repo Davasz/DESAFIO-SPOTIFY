@@ -1,6 +1,6 @@
 <template>
     <div class="search-div">
-        <input v-model="inputValue" class="search" placeholder="Procure o artista/banda" type="text">
+        <input v-model="inputValue" class="search" placeholder="Procure o artista/banda" type="text" @keydown.enter="onSearch">
         <img @click="onSearch()" class="search-icon" src="../assets/img/icons/search-icon.svg" alt="Ícone de pesquisa">
     </div>
 </template>
@@ -31,7 +31,7 @@ export default {
                         type: 'error',
                         message: 'Erro ao buscar artistas'
                     })
-                });
+                })
         }
 
         // Returning the variables
