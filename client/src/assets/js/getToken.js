@@ -35,6 +35,7 @@ const isTokenValid = async () => {
         })
         return true
     } catch (error) {
+        localStorage.removeItem('token')
         return false
     }
 
