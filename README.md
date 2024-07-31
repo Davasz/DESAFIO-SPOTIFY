@@ -162,20 +162,12 @@ Todas elas fazem parte da Dev API do Spotify, [Acesse a documentação](https://
 ## ✒️ Autores
 
 * **Davi Souza** - *Desenvolvimento Completo* - [Davi Souza](https://www.linkedin.com/in/davi-souza-745155246/)
-* **EnterScience** - *Idealizador do Proejto* - [EnterScience](https://enterscience.com.br)
-* **Guilherme Silva** - *Tech Lead da EnterScience e mentor do projeto*
+
 ## 📄 Licença
 
 - [MIT](https://choosealicense.com/licenses/mit/)
 
 - *O uso da API Spotify deve ser respeitada de acordo com os termos e condições de uso, provido pelo [Spotify Dev API](https://developer.spotify.com/documentation/web-api)*
-
-
-## 🎁 Expressões de gratidão
-
-- Agradeço à [EnterScience](https://enterscience.com.br) pela oportinidade oferecida e pela idealização do projeto;
-
-- Agradeço ao mentor, Guilherme Silva, pelo rápido atendimento e suporte às dúvidas.
 
 ---
 
